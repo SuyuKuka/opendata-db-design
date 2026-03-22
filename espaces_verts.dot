@@ -17,6 +17,7 @@ digraph espaces_verts {
         id_atelier_horticole
         competence
         id_eqpt
+        id_division
         geom_x_y
         last_edited_user
         last_edited_date
