@@ -1,0 +1,43 @@
+digraph espaces_verts {
+    nsq_espace_vert -> {
+        nom_ev
+        type_ev
+        categorie
+        poly_area
+        surface_totale_reelle
+        surface_horticole
+        perimeter
+        annee_ouverture
+        annee_renovation
+        ancien_nom_ev
+        annee_changement
+        presence_cloture
+        ouvert_ferme
+        sites_villes
+        id_atelier_horticole
+        competence
+        id_eqpt
+        geom_x_y
+        last_edited_user
+        last_edited_date
+        nb_entite
+        ida3d_enb
+        adresse_numero
+        adresse_typevoie
+        adresse_libellevoie
+        adresse_complement
+    };
+
+    geom_x_y -> {
+        geom
+        url_plan
+    };
+
+    id_eqpt -> {
+        id_division
+    };
+
+    adresse_numero -> adresse_codepostal;
+    adresse_typevoie -> adresse_codepostal;
+    adresse_libellevoie -> adresse_codepostal;
+}
