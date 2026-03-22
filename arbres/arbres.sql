@@ -80,3 +80,6 @@ CREATE TABLE Arbre (
     CHECK (circonference >= 0),
     CHECK (remarquable IN ('OUI', 'NON', '') OR remarquable IS NULL)
 );
+
+--CHEN Michel
+--HUYNH Minh Van Claude
