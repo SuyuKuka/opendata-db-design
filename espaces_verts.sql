@@ -1,11 +1,21 @@
+DROP TABLE IF EXISTS code_postal CASCADE;
+DROP TABLE IF EXISTS divisions CASCADE;
 DROP TABLE IF EXISTS geo CASCADE;
 DROP TABLE IF EXISTS adresses CASCADE;
 DROP TABLE IF EXISTS equipements CASCADE;
 DROP TABLE IF EXISTS espaces_verts CASCADE;
 
+CREATE TABLE code_postal (
+    adresse_codepostal TEXT PRIMARY KEY
+);
+
+CREATE TABLE divisions (
+    id_division INTEGER PRIMARY KEY
+);
+
 CREATE TABLE geo (
     geom_x_y TEXT PRIMARY KEY,
-    geom TEXT NOT NULL,
+    geom TEXT NOT NULL UNIQUE,
     url_plan TEXT
 );
 
@@ -14,12 +24,14 @@ CREATE TABLE adresses (
     adresse_typevoie TEXT,
     adresse_libellevoie TEXT,
     adresse_codepostal TEXT NOT NULL,
-    PRIMARY KEY (adresse_numero, adresse_typevoie, adresse_libellevoie)
+    PRIMARY KEY (adresse_numero, adresse_typevoie, adresse_libellevoie),
+    FOREIGN KEY (adresse_codepostal) REFERENCES code_postal(adresse_codepostal)
 );
 
 CREATE TABLE equipements (
     id_eqpt TEXT PRIMARY KEY,
-    id_division INTEGER NOT NULL
+    id_division INTEGER NOT NULL,
+    FOREIGN KEY (id_division) REFERENCES divisions(id_division)
 );
 
 CREATE TABLE espaces_verts (
@@ -35,7 +47,7 @@ CREATE TABLE espaces_verts (
     surface_totale_reelle INTEGER,
     surface_horticole INTEGER,
     presence_cloture TEXT,
-    perimeter NUMERIC,
+    perimeter FLOAT,
     annee_ouverture INTEGER,
     annee_renovation INTEGER,
     ancien_nom_ev TEXT,
@@ -43,6 +55,7 @@ CREATE TABLE espaces_verts (
     nb_entites INTEGER,
     ouvert_ferme TEXT,
     id_atelier_horticole INTEGER,
+    id_division INTEGER,
     ida3d_enb TEXT,
     site_villes TEXT,
     id_eqpt TEXT,
@@ -53,6 +66,7 @@ CREATE TABLE espaces_verts (
     FOREIGN KEY (geom_x_y) REFERENCES geo(geom_x_y),
     FOREIGN KEY (id_eqpt) REFERENCES equipements(id_eqpt),
     FOREIGN KEY (adresse_numero, adresse_typevoie, adresse_libellevoie) REFERENCES adresses(adresse_numero, adresse_typevoie, adresse_libellevoie),
+    FOREIGN KEY (id_division) REFERENCES divisions(id_division),
     CHECK (poly_area >= 0),
     CHECK (surface_totale_reelle >= 0),
     CHECK (surface_horticole >= 0),
