@@ -60,3 +60,6 @@ CREATE TABLE espaces_verts (
     CHECK (presence_cloture IN ('Oui', 'Non') OR presence_cloture IS NULL),
     CHECK (ouvert_ferme IN ('Oui', 'Non') OR ouvert_ferme IS NULL)
 );
+
+--CHEN Michel
+--HUYNH Minh Van Claude
