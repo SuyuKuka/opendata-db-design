@@ -1,7 +1,8 @@
 -- id_eqpt -> id_division
 SELECT id_eqpt, COUNT(DISTINCT id_division)
 FROM espaces_verts
-WHERE id_eqpt <> '0'        -- Il n y avait qu'un XXXX mais peut être qu'on pourrait vérifier les chaines de X avec un like
+WHERE id_eqpt IS NOT NULL 
+    AND id_eqpt <> '0'        -- Il n y avait qu'un XXXX mais peut être qu'on pourrait vérifier les chaines de X avec un like
 GROUP BY id_eqpt
 HAVING COUNT(DISTINCT id_division) > 1;
 
