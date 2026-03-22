@@ -44,3 +44,6 @@ LEFT JOIN Lieu l ON (
     gp.complement_adresse_lieu = l.complement_adresse AND 
     gp.arrondissement = l.arrondissement
 );
+
+--CHEN Michel
+--HUYNH Minh Van Claude
