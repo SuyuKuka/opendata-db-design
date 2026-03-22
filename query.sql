@@ -1,31 +1,24 @@
 -- id_eqpt -> id_division
-SELECT id_eqpt, COUNT(id_division)
+SELECT id_eqpt, COUNT(DISTINCT id_division)
 FROM espaces_verts
-WHERE id_eqpt IS NOT NULL
-  AND id_eqpt <> '0'        -- Il n y avait qu'un XXXX mais peut être qu'on pourrait vérifier les chaines de X avec un like
+WHERE id_eqpt <> '0'        -- Il n y avait qu'un XXXX mais peut être qu'on pourrait vérifier les chaines de X avec un like
 GROUP BY id_eqpt
-HAVING COUNT(id_division) > 1;
+HAVING COUNT(DISTINCT id_division) > 1;
 
 -- geom_x_y -> geom
-SELECT geom_x_y, COUNT(geom) AS nb_geom
+SELECT geom_x_y, COUNT(DISTINCT geom) AS nb_geom
 FROM espaces_verts
 GROUP BY geom_x_y
-HAVING COUNT(geom) > 1;
+HAVING COUNT(DISTINCT geom) > 1;
 
 -- geom_x_y -> URL_PLAN
-SELECT geom_x_y, COUNT(URL_PLAN) AS nb_url
+SELECT geom_x_y, COUNT(DISTINCT URL_PLAN) AS nb_url
 FROM espaces_verts
 GROUP BY geom_x_y
-HAVING COUNT(URL_PLAN) > 1;
-
--- geom_x_y -> (geom, URL_PLAN)
-SELECT geom_x_y, COUNT(geom, URL_PLAN) AS nb_combinaison
-FROM espaces_verts
-GROUP BY geom_x_y
-HAVING COUNT(geom, URL_PLAN) > 1;
+HAVING COUNT(DISTINCT URL_PLAN) > 1;
 
 -- Verification que geom_x_y n est jamais NULL
-SELECT COUNT(*) AS nb_null
+SELECT COUNT(*) AS geom_x_y_null
 FROM espaces_verts
 WHERE geom_x_y IS NULL;
 
